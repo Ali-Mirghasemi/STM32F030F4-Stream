@@ -237,7 +237,20 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
+	switch ((uint32_t) huart->Instance) {
+		case USART1_BASE:
+			UARTStream_txHandle(&stream);
+			break;
+	}
+}
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+	switch ((uint32_t) huart->Instance) {
+		case USART1_BASE:
+			UARTStream_rxHandle(&stream);
+			break;
+	}
+}
 /* USER CODE END 4 */
 
 /**
